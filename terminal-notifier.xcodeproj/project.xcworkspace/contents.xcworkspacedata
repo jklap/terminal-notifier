@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Terminal Notifier.xcodeproj">
+      location = "self:terminal-notifier.xcodeproj">
    </FileRef>
 </Workspace>
