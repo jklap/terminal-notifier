@@ -54,10 +54,6 @@ The program ends and will return the result of the choosen "action"
 
 ## Installation
 
-### Caveats
-
-* It is currently packaged as an application bundle, because `NSUserNotification` does not work from a ‘Foundation tool’. [radar://11956694](radar://11956694)
-
 ### Download
 
 TODO: provide release binaries
@@ -65,25 +61,15 @@ TODO: provide release binaries
 Prebuilt binaries are available from the
 [releases section](https://github.com/jklap/terminal-notifier/releases).
 
-Or if you want to use this from
-[Ruby](https://github.com/jklap/terminal-notifier/tree/master/Ruby), you can install it through RubyGems:
-
-```bash
-sudo gem install terminal-notifier
-```
-
-You can also install it via [Homebrew](https://github.com/mxcl/homebrew):
-```bash
-brew install terminal-notifier
-```
-
 ### Building and Installation
 
 If you need to rebuild the application:
 
 Build using Xcode (defaults to building debug version):
 ```bash
-xcodebuild
+xcodebuild \
+    CODE_SIGN_IDENTITY="-" \
+    build
 ```
 
 The binary will be available at:
@@ -93,7 +79,8 @@ build/Debug/terminal-notifier.app/Contents/MacOS/terminal-notifier
 
 Building the release version:
 ```bash
-xcodebuild -configuration Release
+xcodebuild \
+    -configuration Release
 ```
 
 ### Path
@@ -105,19 +92,17 @@ For instance, if the application has been installed to /Applications then you wo
 /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -help
 ```
 
+You can also use 
 ```bash
+# verify it's location
 mdfind "kMDItemCFBundleIdentifier == 'com.halfsane.terminal-notifier'"
 
+# add it to PATH
 export PATH=$PATH:$(mdfind "kMDItemCFBundleIdentifier == 'com.halfsane.terminal-notifier'")/Contents/MacOS
 
+# or just create a shell alias
 alias terminal-notifier=$(mdfind "kMDItemCFBundleIdentifier == 'com.halfsane.terminal-notifier'")/Contents/MacOS/terminal-notifier
 ```
-
-### Path (via Rubyd)
-
-The Ruby gem, which wraps this tool, _does_ have a bin wrapper.
-
-This will obviously be a bit slower than using the tool without the wrapper.
 
 ## Usage
 
